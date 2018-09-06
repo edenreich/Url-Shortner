@@ -1,9 +1,13 @@
 import 'reflect-metadata';
 import Koa from 'koa';
+import bodyParser from 'koa-bodyparser';
 import { createConnection } from 'typeorm';
 import { router as web } from './routes/web';
 
 export const app = new Koa();
+
+// Before Middlewares.
+app.use(bodyParser());
 
 // Application Routes.
 app.use(web.routes());
