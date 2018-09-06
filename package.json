@@ -1,0 +1,34 @@
+{
+  "name": "url-shortner",
+  "version": "1.0.0",
+  "description": "A simple url-shortner application",
+  "main": "./src/server.ts",
+  "scripts": {
+    "start": "ts-node --compiler typescript --project tsconfig.json src/server.ts",
+    "watch": "nodemon -x npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/edenreich/Url-Shortner.git"
+  },
+  "author": "Eden Reich<eden.reich@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/edenreich/Url-Shortner/issues"
+  },
+  "homepage": "https://github.com/edenreich/Url-Shortner#readme",
+  "dependencies": {
+    "koa": "^2.5.2",
+    "koa-router": "^7.4.0",
+    "pg": "^7.4.3",
+    "reflect-metadata": "^0.1.12",
+    "ts-node": "^7.0.1",
+    "typeorm": "^0.2.7",
+    "typescript": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/koa-router": "^7.0.31",
+    "@types/node": "^10.9.4",
+    "nodemon": "^1.18.4"
+  }
+}
