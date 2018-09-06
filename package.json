@@ -19,6 +19,7 @@
   "homepage": "https://github.com/edenreich/Url-Shortner#readme",
   "dependencies": {
     "koa": "^2.5.2",
+    "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
     "pg": "^7.4.3",
     "reflect-metadata": "^0.1.12",
@@ -27,6 +28,7 @@
     "typescript": "^3.0.3"
   },
   "devDependencies": {
+    "@types/koa-bodyparser": "^5.0.1",
     "@types/koa-router": "^7.0.31",
     "@types/node": "^10.9.4",
     "nodemon": "^1.18.4"
