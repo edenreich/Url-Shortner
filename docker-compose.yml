@@ -1,55 +1,24 @@
 version: '3'
+
 services:
     nginx:
         container_name: nginx
         hostname: nginx
         build: 
-            context: ./build/nginx
+            context: ./services/nginx
             dockerfile: Dockerfile
         ports:
             - "80:80"
         networks:
             - appnet
         depends_on:
-            - node1
-            - node2
-            - node3
-    node1:
-        container_name: node1
-        hostname: node1
+            - node
+    node:
+        container_name: node
+        hostname: node
         build: 
             context: .
-            dockerfile: ./build/node/Dockerfile
-        volumes:
-            - ./src:/app/src
-        env_file:
-            - ./env/ormconfig.env
-            - ./env/app.env
-        networks:
-            - appnet
-        depends_on:
-            - postgres
-    node2:
-        container_name: node2
-        hostname: node2
-        build: 
-            context: .
-            dockerfile: ./build/node/Dockerfile
-        volumes:
-            - ./src:/app/src
-        env_file:
-            - ./env/ormconfig.env
-            - ./env/app.env
-        networks:
-            - appnet
-        depends_on:
-            - postgres
-    node3:
-        container_name: node3
-        hostname: node3
-        build: 
-            context: .
-            dockerfile: ./build/node/Dockerfile
+            dockerfile: ./services/node/Dockerfile
         volumes:
             - ./src:/app/src
         env_file:
@@ -63,7 +32,7 @@ services:
         container_name: db
         hostname: db
         build: 
-            context: ./build/postgres
+            context: ./services/postgres
         restart: always
         volumes:
             - dbdata:/var/lib/postgresql/data

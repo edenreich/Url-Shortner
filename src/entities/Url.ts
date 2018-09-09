@@ -11,7 +11,7 @@ export class Url extends BaseEntity
     @Column({name: "original_url", type: "varchar", length: 50})
     originalUrl: string;
 
-    @Column({name: "short_url", type: "varchar", length: 10})
+    @Column({name: "short_url", type: "varchar", length: 10, unique: true})
     shortUrl: string;
 
     @UpdateDateColumn({type: "timestamp"})
