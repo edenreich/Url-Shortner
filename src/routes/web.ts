@@ -1,21 +1,63 @@
-import Router from 'koa-router';
-import { createReadStream } from 'fs';
+import * as Router from 'koa-router';
+import * as fs from 'fs';
+import * as path from 'path';
+import { Url } from '../entities/Url';
 
-export const router = new Router;
+export const router = new Router();
 
-router.get('/shortner', async (ctx: any) => {
+router.get('/assets/:folder/:file', async (ctx: any, next: any) => {
+    const file = ctx.params.file;
+    const folder = ctx.params.folder;
+    const ext = path.extname(file);
+    let contentType: any;
+    
+    switch (ext)
+    {
+        case '.js':
+            contentType = 'text/javascript';
+            break;
+        case '.css':
+            contentType = 'text/css';
+            break;
+        default:
+            ctx.throw(404);
+            break;
+    }
 
-    // Serve an html form.
-    ctx.type = 'html';
-    ctx.body = createReadStream(__dirname + '/../public/form.html');
+    ctx.type = contentType;
+    ctx.body = fs.createReadStream(__dirname + '/../public/assets/'+folder+'/'+file);
     ctx.status = 200;
-  
+    next();
 });
 
-router.post('/shortner/create', async (ctx: any) => {
-    // @todo store a record in the database.
-    
-    ctx.body = 'TEST';
+router.get('/shortner', async (ctx: any) => {
+    ctx.type = 'html';
+    ctx.body = fs.createReadStream(__dirname + '/../public/form.html');
     ctx.status = 200;
+});
+
+router.post('/shortner/create', async (ctx: any, next: any) => {
+    let url: Url = new Url;
+
+    url.originalUrl = ctx.request.body;
+    url.shortUrl = Math.random().toString(36).slice(5);
+   
+    try {
+        url.save();
+    } catch (err) {
+        console.log('could not save shortned url!');
+    }
+
+    await ctx.redirect('/shortner');
+    next();
+});
+
+router.get('/:url', async (ctx: any, next: any) => {
+    // @todo redirect the user to the original url from the database.
+
+
+    
+    // ctx.redirect()
+    next();
 });
 
