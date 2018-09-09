@@ -4,8 +4,11 @@
   "description": "A simple url-shortner application",
   "main": "./src/server.ts",
   "scripts": {
-    "start": "ts-node --compiler typescript --project tsconfig.json src/server.ts",
-    "watch": "nodemon -x npm run start"
+    "start": "ts-node --compiler typescript --project config/tsconfig.json src/server.ts",
+    "watch": "nodemon -x npm run start",
+    "dev": "webpack --config config/webpack.config.js --mode development",
+    "production": "webpack --config config/webpack.config.js --mode production",
+    "build-client-assets": "tsc --project config/tsconfig.client.json"
   },
   "repository": {
     "type": "git",
@@ -18,6 +21,7 @@
   },
   "homepage": "https://github.com/edenreich/Url-Shortner#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "koa": "^2.5.2",
     "koa-bodyparser": "^4.2.1",
     "koa-router": "^7.4.0",
@@ -28,9 +32,13 @@
     "typescript": "^3.0.3"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/koa-bodyparser": "^5.0.1",
     "@types/koa-router": "^7.0.31",
     "@types/node": "^10.9.4",
-    "nodemon": "^1.18.4"
+    "nodemon": "^1.18.4",
+    "ts-loader": "^5.0.0",
+    "webpack": "^4.17.2",
+    "webpack-cli": "^3.1.0"
   }
 }
